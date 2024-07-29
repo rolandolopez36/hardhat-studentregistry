@@ -161,14 +161,15 @@ describe("StudentRegistry", function () {
   });
 
   it("Should not allow registration with age zero", async function () {
-    const [owner] = await ethers.getSigners();
+    const [] = await ethers.getSigners();
     const name = "John Doe";
     const age = 0;
     const course = "Blockchain 101";
 
-    // Attempt to register a student with age zero and verify it fails
+    console.log("Attempting to register with age zero. Expecting failure.");
     await expect(
       studentRegistry.register(name, age, course)
     ).to.be.revertedWith("Age must be greater than zero.");
+    console.log("Registration with age zero failed as expected.");
   });
 });
