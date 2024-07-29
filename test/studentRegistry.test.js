@@ -105,9 +105,13 @@ describe("StudentRegistry", function () {
     const age = 20;
     const course = "Blockchain 101";
 
+    console.log(
+      `Registering student with name: ${name}, age: ${age}, course: ${course}`
+    );
     await studentRegistry.register(name, age, course);
-    const studentData = await studentRegistry.connect(owner).viewMyData();
 
+    console.log("Retrieving student data for the registered student.");
+    const studentData = await studentRegistry.connect(owner).viewMyData();
     console.log("Student Data:", studentData);
 
     assert.equal(studentData[0], name);
