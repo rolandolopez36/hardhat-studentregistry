@@ -137,10 +137,14 @@ describe("StudentRegistry", function () {
     const age = 20;
     const course = "Blockchain 101";
 
-    // Register the student and verify the event
+    console.log(
+      `Registering student and expecting event emission. Name: ${name}, Age: ${age}, Course: ${course}`
+    );
     await expect(studentRegistry.register(name, age, course))
       .to.emit(studentRegistry, "StudentRegistered")
       .withArgs(owner.address, name, age, course);
+
+    console.log("Event emitted successfully.");
   });
 
   it("Should not allow registration with empty name", async function () {
