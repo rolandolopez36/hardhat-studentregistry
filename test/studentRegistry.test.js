@@ -48,13 +48,26 @@ describe("StudentRegistry", function () {
     const age = 20;
     const course = "Blockchain 101";
 
+    console.log(
+      `Attempting to register student with name: ${name}, age: ${age}, course: ${course}`
+    );
+
     // Attempt to register the student for the first time
-    await studentRegistry.register(name, age, course);
+    let transactionResponse = await studentRegistry.register(name, age, course);
+    await transactionResponse.wait(1);
+
+    console.log("Student registered successfully for the first time.");
+
+    // Verify that the student is registered
+    let studentId = await studentRegistry.addressToStudentId(owner.address);
+    console.log(`Student ID after first registration: ${studentId.toString()}`);
 
     // Attempt to register the same student for the second time and verify it fails
     await expect(
       studentRegistry.register(name, age, course)
     ).to.be.revertedWith("Student is already registered.");
+
+    console.log("Second registration attempt failed as expected.");
   });
 
   it("Should allow viewing all students' information", async function () {
