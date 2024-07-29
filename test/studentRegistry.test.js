@@ -76,10 +76,12 @@ describe("StudentRegistry", function () {
     const student1 = { name: "John Doe", age: 20, course: "Blockchain 101" };
     const student2 = { name: "Jane Smith", age: 22, course: "Solidity 202" };
 
-    // Register two students
+    console.log("Registering first student:", student1);
     await studentRegistry
       .connect(owner)
       .register(student1.name, student1.age, student1.course);
+
+    console.log("Registering second student:", student2);
     await studentRegistry
       .connect(addr1)
       .register(student2.name, student2.age, student2.course);
