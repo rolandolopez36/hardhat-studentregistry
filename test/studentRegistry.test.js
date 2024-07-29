@@ -120,12 +120,15 @@ describe("StudentRegistry", function () {
   });
 
   it("Should not allow unregistered student to view their data", async function () {
-    const [owner, addr1] = await ethers.getSigners();
+    const [addr1] = await ethers.getSigners();
 
-    // Ensure addr1 is not registered
+    console.log("Ensuring that unregistered student cannot view data.");
     await expect(
       studentRegistry.connect(addr1).viewMyData()
     ).to.be.revertedWith("Student is not registered.");
+    console.log(
+      "Unregistered student was correctly prevented from viewing data."
+    );
   });
 
   it("Should emit StudentRegistered event when a student registers", async function () {
