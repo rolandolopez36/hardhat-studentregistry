@@ -148,15 +148,16 @@ describe("StudentRegistry", function () {
   });
 
   it("Should not allow registration with empty name", async function () {
-    const [owner] = await ethers.getSigners();
+    const [] = await ethers.getSigners();
     const name = "";
     const age = 20;
     const course = "Blockchain 101";
 
-    // Attempt to register a student with an empty name and verify it fails
+    console.log("Attempting to register with empty name. Expecting failure.");
     await expect(
       studentRegistry.register(name, age, course)
     ).to.be.revertedWith("Name cannot be empty.");
+    console.log("Registration with empty name failed as expected.");
   });
 
   it("Should not allow registration with age zero", async function () {
